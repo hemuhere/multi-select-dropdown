@@ -1,0 +1,125 @@
+:host {
+  --dd-bg: #ffffff;                
+  --dd-menu-bg: #ffffff;            
+  --dd-border: rgba(60, 60, 67, 0.29);
+  --dd-text: #1c1c1e; 
+  --dd-secondary-text: #6e6e73; 
+  --dd-focus: #007aff;
+  --dd-tag-bg: rgba(0, 122, 255, 0.1);
+  --dd-tag-text: #007aff;
+  --dd-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.12);
+
+    display: block;
+    position: relative;
+    width: 100%;
+    color: var(--dd-text);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :host {
+    --dd-bg: #1c1c1e;
+    --dd-menu-bg: #2c2c2e;
+    --dd-border: rgba(84, 84, 88, 0.65);
+    --dd-text: #ffffff;
+    --dd-secondary-text: #9b9ba0;
+    --dd-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  }
+} */
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 6px 10px;
+  border: 1px solid var(--dd-border);
+  background: var(--dd-bg);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+:host(.disabled) .control {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+:host(.open) .control {
+  border-color: var(--dd-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--dd-focus) 20%, transparent);
+}
+
+.tags {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.placeholder {
+  opacity: 0.6;
+  font-size: 14px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--dd-tag-bg);
+  color: var(--dd-tag-text);
+  font-size: 13px;
+}
+
+.tag-x {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: inherit;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+}
+
+.input {
+  border: 0;
+  outline: 0;
+  flex: 1;
+  min-width: 60px;
+  height: 28px;
+  font-size: 14px;
+  background: transparent;
+  color: inherit;
+  cursor: text;
+}
+
+.chev {
+  font-size: 12px;
+  opacity: 0.7;
+  user-select: none;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  max-height: 250px;
+  overflow: auto;
+  background: var(--dd-menu-bg);
+  border: 1px solid var(--dd-border);
+  border-radius: 10px;
+  box-shadow: var(--dd-shadow);
+  z-index: 50;
+  padding: 6px;
+}
+
+.empty {
+  padding: 10px;
+  opacity: 0.7;
+  font-size: 14px;
+}

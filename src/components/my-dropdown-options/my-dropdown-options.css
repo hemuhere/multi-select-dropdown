@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+:host([disabled]) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+:host([active]) {
+  background: rgba(59, 130, 246, 0.12);
+}
+
+:host([selected]) .label {
+  font-weight: 600;
+}
+
+.label {
+  font-size: 14px;
+}
+
+.check {
+  font-size: 12px;
+  opacity: 0.8;
+}
