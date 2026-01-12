@@ -6,56 +6,145 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
+    interface MyDropdown {
         /**
-          * The first name
+          * @default []
          */
-        "first": string;
+        "defaultValue": string[];
         /**
-          * The last name
+          * @default false
          */
-        "last": string;
+        "disabled": boolean;
         /**
-          * The middle name
+          * @default true
          */
-        "middle": string;
+        "filterable": boolean;
+        /**
+          * @default 'Select...'
+         */
+        "placeholder": string;
+    }
+    interface MyDropdownOption {
+        /**
+          * @default false
+         */
+        "active": boolean;
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        /**
+          * @default false
+         */
+        "hidden": boolean;
+        "label"?: string;
+        /**
+          * @default false
+         */
+        "selected": boolean;
+        "value": string;
     }
 }
+export interface MyDropdownCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMyDropdownElement;
+}
+export interface MyDropdownOptionCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMyDropdownOptionElement;
+}
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLMyDropdownElementEventMap {
+        "myChange": { value: string[] };
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    interface HTMLMyDropdownElement extends Components.MyDropdown, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMyDropdownElementEventMap>(type: K, listener: (this: HTMLMyDropdownElement, ev: MyDropdownCustomEvent<HTMLMyDropdownElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMyDropdownElementEventMap>(type: K, listener: (this: HTMLMyDropdownElement, ev: MyDropdownCustomEvent<HTMLMyDropdownElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMyDropdownElement: {
+        prototype: HTMLMyDropdownElement;
+        new (): HTMLMyDropdownElement;
+    };
+    interface HTMLMyDropdownOptionElementEventMap {
+        "optionSelect": { value: string };
+    }
+    interface HTMLMyDropdownOptionElement extends Components.MyDropdownOption, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMyDropdownOptionElementEventMap>(type: K, listener: (this: HTMLMyDropdownOptionElement, ev: MyDropdownOptionCustomEvent<HTMLMyDropdownOptionElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMyDropdownOptionElementEventMap>(type: K, listener: (this: HTMLMyDropdownOptionElement, ev: MyDropdownOptionCustomEvent<HTMLMyDropdownOptionElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMyDropdownOptionElement: {
+        prototype: HTMLMyDropdownOptionElement;
+        new (): HTMLMyDropdownOptionElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "my-dropdown": HTMLMyDropdownElement;
+        "my-dropdown-option": HTMLMyDropdownOptionElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
+    interface MyDropdown {
         /**
-          * The first name
+          * @default []
          */
-        "first"?: string;
+        "defaultValue"?: string[];
         /**
-          * The last name
+          * @default false
          */
-        "last"?: string;
+        "disabled"?: boolean;
         /**
-          * The middle name
+          * @default true
          */
-        "middle"?: string;
+        "filterable"?: boolean;
+        "onMyChange"?: (event: MyDropdownCustomEvent<{ value: string[] }>) => void;
+        /**
+          * @default 'Select...'
+         */
+        "placeholder"?: string;
+    }
+    interface MyDropdownOption {
+        /**
+          * @default false
+         */
+        "active"?: boolean;
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * @default false
+         */
+        "hidden"?: boolean;
+        "label"?: string;
+        "onOptionSelect"?: (event: MyDropdownOptionCustomEvent<{ value: string }>) => void;
+        /**
+          * @default false
+         */
+        "selected"?: boolean;
+        "value": string;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "my-dropdown": MyDropdown;
+        "my-dropdown-option": MyDropdownOption;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "my-dropdown": LocalJSX.MyDropdown & JSXBase.HTMLAttributes<HTMLMyDropdownElement>;
+            "my-dropdown-option": LocalJSX.MyDropdownOption & JSXBase.HTMLAttributes<HTMLMyDropdownOptionElement>;
         }
     }
 }

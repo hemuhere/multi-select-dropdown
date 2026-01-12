@@ -3,12 +3,49 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
+    <title>Multi-select Dropdown</title>
 
     <script type="module" src="/build/multi-select-dropdown.esm.js"></script>
     <script nomodule src="/build/multi-select-dropdown.js"></script>
+
+    <style>
+      my-dropdown {
+        width: 100%;
+        margin: 50px 0;
+        --dd-focus: #0070f3;
+        --dd-tag-bg: #0070f3;
+        --dd-tag-text: #fff;
+      }
+      my-dropdown::part(menu) {
+        border-radius: 14px;
+      }
+    </style>
   </head>
+
   <body>
-    <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component>
+    <my-dropdown id="appleProducts" placeholder="Choose Apple products..." filterable="true">
+      <my-dropdown-option value="iphone-15">iPhone 15</my-dropdown-option>
+      <my-dropdown-option value="iphone-15-plus">iPhone 15 Plus</my-dropdown-option>
+      <my-dropdown-option value="iphone-15-pro">iPhone 15 Pro</my-dropdown-option>
+      <my-dropdown-option value="iphone-15-pro-max">iPhone 15 Pro Max</my-dropdown-option>
+      <my-dropdown-option value="macbook-air-m2">MacBook Air (M2)</my-dropdown-option>
+      <my-dropdown-option value="macbook-air-m3">MacBook Air (M3)</my-dropdown-option>
+      <my-dropdown-option value="macbook-pro-14">MacBook Pro 14"</my-dropdown-option>
+      <my-dropdown-option value="macbook-pro-16">MacBook Pro 16"</my-dropdown-option>
+      <my-dropdown-option value="apple-watch-se">Apple Watch SE</my-dropdown-option>
+      <my-dropdown-option value="apple-watch-series-9">Apple Watch Series 9</my-dropdown-option>
+      <my-dropdown-option value="apple-watch-ultra-2">Apple Watch Ultra 2</my-dropdown-option>
+    </my-dropdown>
+
+    <script>
+      const selectDropdownItems = document.getElementById('appleProducts');
+
+      selectDropdownItems.defaultValue = ['iphone-15-pro', 'macbook-air-m3'];
+
+      selectDropdownItems.addEventListener('myChange', (e) => {
+        console.log('Selected Apple products:', e.detail.value);
+      });
+    </script>
+
   </body>
 </html>
